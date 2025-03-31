@@ -1,0 +1,501 @@
+
+<!DOCTYPE html>
+
+<html class="no-js" lang="zh">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1" name="viewport"/>
+<meta content="RonaldLN" name="author"/>
+<link href="https://NPU-Home.github.io/vision-docs-site/modules/pointing_gesture_recognition/" rel="canonical"/>
+<link href="../gesture_recognition/" rel="prev"/>
+<link href="../posture_identification/" rel="next"/>
+<link href="../../image/ico.png" rel="icon"/>
+<meta content="mkdocs-1.6.1, mkdocs-material-9.6.10" name="generator"/>
+<title>指向手势识别模块 - 视觉文档</title>
+<link href="../../assets/stylesheets/main.4af4bdda.min.css" rel="stylesheet"/>
+<link href="../../assets/stylesheets/palette.06af60db.min.css" rel="stylesheet"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&amp;display=fallback" rel="stylesheet"/>
+<style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+<link href="../../theme/css/import.css" rel="stylesheet"/>
+<script>__md_scope=new URL("../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+</head>
+<body data-md-color-accent="indigo" data-md-color-primary="indigo" data-md-color-scheme="auto" dir="ltr">
+<input autocomplete="off" class="md-toggle" data-md-toggle="drawer" id="__drawer" type="checkbox"/>
+<input autocomplete="off" class="md-toggle" data-md-toggle="search" id="__search" type="checkbox"/>
+<label class="md-overlay" for="__drawer"></label>
+<div data-md-component="skip">
+<a class="md-skip" href="#_1">
+          跳转至
+        </a>
+</div>
+<div data-md-component="announce">
+</div>
+<header class="md-header" data-md-component="header">
+<nav aria-label="页眉" class="md-header__inner md-grid">
+<a aria-label="视觉文档" class="md-header__button md-logo" data-md-component="logo" href="../.." title="视觉文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m13.73 15-3.9 6.76a9.984 9.984 0 0 0 8.49-2.01l-3.66-6.35M2.46 15c.92 2.92 3.15 5.26 5.99 6.34L12.12 15m-3.58-3-3.9-6.75A9.86 9.86 0 0 0 2 12c0 .68.07 1.35.2 2h7.49m12.11-4h-7.49l.29.5 4.76 8.25A9.93 9.93 0 0 0 22 12c0-.69-.07-1.36-.2-2m-.26-1c-.92-2.93-3.15-5.26-5.99-6.34L11.88 9M9.4 10.5l4.77-8.26C13.47 2.09 12.75 2 12 2c-2.4 0-4.6.84-6.32 2.25l3.66 6.35z"></path></svg>
+</a>
+<label class="md-header__button md-icon" for="__drawer">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"></path></svg>
+</label>
+<div class="md-header__title" data-md-component="header-title">
+<div class="md-header__ellipsis">
+<div class="md-header__topic">
+<span class="md-ellipsis">
+            视觉文档
+          </span>
+</div>
+<div class="md-header__topic" data-md-component="header-topic">
+<span class="md-ellipsis">
+            
+              指向手势识别模块
+            
+          </span>
+</div>
+</div>
+</div>
+<label class="md-header__button md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+</label>
+<div class="md-search" data-md-component="search" role="dialog">
+<label class="md-search__overlay" for="__search"></label>
+<div class="md-search__inner" role="search">
+<form class="md-search__form" name="search">
+<input aria-label="搜索" autocapitalize="off" autocomplete="off" autocorrect="off" class="md-search__input" data-md-component="search-query" name="query" placeholder="搜索" required="" spellcheck="false" type="text"/>
+<label class="md-search__icon md-icon" for="__search">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"></path></svg>
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</label>
+<nav aria-label="查找" class="md-search__options">
+<button aria-label="清空当前内容" class="md-search__icon md-icon" tabindex="-1" title="清空当前内容" type="reset">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"></path></svg>
+</button>
+</nav>
+</form>
+<div class="md-search__output">
+<div class="md-search__scrollwrap" data-md-scrollfix="" tabindex="0">
+<div class="md-search-result" data-md-component="search-result">
+<div class="md-search-result__meta">
+            正在初始化搜索引擎
+          </div>
+<ol class="md-search-result__list" role="presentation"></ol>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div class="md-header__source">
+<a class="md-source" data-md-component="source" href="https://github.com/NPU-Home/vision-docs" title="前往仓库">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.3 20H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h6l2 2h8c1.1 0 2 .9 2 2v6.6c-.6-.4-1.3-.8-2-1.1V8H4v10h5.3c0 .1-.1.2-.1.3l-.4.7.3.7c.1.1.1.2.2.3M23 19c-.9 2.3-3.3 4-6 4s-5.1-1.7-6-4c.9-2.3 3.3-4 6-4s5.1 1.7 6 4m-3.5 0c0-1.4-1.1-2.5-2.5-2.5s-2.5 1.1-2.5 2.5 1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5M17 18c-.6 0-1 .4-1 1s.4 1 1 1 1-.4 1-1-.4-1-1-1"></path></svg>
+</div>
+<div class="md-source__repository">
+    NPU-Home/vision-docs
+  </div>
+</a>
+</div>
+</nav>
+</header>
+<div class="md-container" data-md-component="container">
+<nav aria-label="标签" class="md-tabs" data-md-component="tabs">
+<div class="md-grid">
+<ul class="md-tabs__list">
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../..">
+        
+  
+  
+    
+  
+  首页
+
+      </a>
+</li>
+<li class="md-tabs__item md-tabs__item--active">
+<a class="md-tabs__link" href="../">
+          
+  
+  
+    
+  
+  模块
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../scripts/">
+          
+  
+  
+    
+  
+  脚本
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../blog/">
+          
+  
+  
+    
+  
+  记录
+
+        </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../about/">
+        
+  
+  
+    
+  
+  关于
+
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../../comments/">
+        
+  
+  
+    
+  
+  讨论
+
+      </a>
+</li>
+</ul>
+</div>
+</nav>
+<main class="md-main" data-md-component="main">
+<div class="md-main__inner md-grid">
+<div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="导航栏" class="md-nav md-nav--primary md-nav--lifted" data-md-level="0">
+<label class="md-nav__title" for="__drawer">
+<a aria-label="视觉文档" class="md-nav__button md-logo" data-md-component="logo" href="../.." title="视觉文档">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="m13.73 15-3.9 6.76a9.984 9.984 0 0 0 8.49-2.01l-3.66-6.35M2.46 15c.92 2.92 3.15 5.26 5.99 6.34L12.12 15m-3.58-3-3.9-6.75A9.86 9.86 0 0 0 2 12c0 .68.07 1.35.2 2h7.49m12.11-4h-7.49l.29.5 4.76 8.25A9.93 9.93 0 0 0 22 12c0-.69-.07-1.36-.2-2m-.26-1c-.92-2.93-3.15-5.26-5.99-6.34L11.88 9M9.4 10.5l4.77-8.26C13.47 2.09 12.75 2 12 2c-2.4 0-4.6.84-6.32 2.25l3.66 6.35z"></path></svg>
+</a>
+    视觉文档
+  </label>
+<div class="md-nav__source">
+<a class="md-source" data-md-component="source" href="https://github.com/NPU-Home/vision-docs" title="前往仓库">
+<div class="md-source__icon md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M9.3 20H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2h6l2 2h8c1.1 0 2 .9 2 2v6.6c-.6-.4-1.3-.8-2-1.1V8H4v10h5.3c0 .1-.1.2-.1.3l-.4.7.3.7c.1.1.1.2.2.3M23 19c-.9 2.3-3.3 4-6 4s-5.1-1.7-6-4c.9-2.3 3.3-4 6-4s5.1 1.7 6 4m-3.5 0c0-1.4-1.1-2.5-2.5-2.5s-2.5 1.1-2.5 2.5 1.1 2.5 2.5 2.5 2.5-1.1 2.5-2.5M17 18c-.6 0-1 .4-1 1s.4 1 1 1 1-.4 1-1-.4-1-1-1"></path></svg>
+</div>
+<div class="md-source__repository">
+    NPU-Home/vision-docs
+  </div>
+</a>
+</div>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../..">
+<span class="md-ellipsis">
+    首页
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active md-nav__item--section md-nav__item--nested">
+<input checked="" class="md-nav__toggle md-toggle" id="__nav_2" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../">
+<span class="md-ellipsis">
+    模块
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_2" id="__nav_2_label" tabindex="">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="true" aria-labelledby="__nav_2_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_2">
+<span class="md-nav__icon md-icon"></span>
+            模块
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../face_identification/">
+<span class="md-ellipsis">
+    人脸识别模块
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../face_orientation_recognition/">
+<span class="md-ellipsis">
+    人脸朝向识别模块
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../gesture_recognition/">
+<span class="md-ellipsis">
+    手势识别模块
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item md-nav__item--active">
+<input class="md-nav__toggle md-toggle" id="__toc" type="checkbox"/>
+<label class="md-nav__link md-nav__link--active" for="__toc">
+<span class="md-ellipsis">
+    指向手势识别模块
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<a class="md-nav__link md-nav__link--active" href="./">
+<span class="md-ellipsis">
+    指向手势识别模块
+    
+  </span>
+</a>
+<nav aria-label="目录" class="md-nav md-nav--secondary" style="display:none">8yyGFPNOmdt8Umk2TPK4OA==;HFn3yE9whGTEO/RC9ELVK9DUyD0EDy6CTs3X+5t917Q+CXWh/XSj4pps7pTjmjKhIUhf8lC1FTnGJLJa9eCazDvp1oTiZVsZL4miwxEYOI4XmtmLUC2cCdOsxgPSqxdSLDILmmrRhrvWiALgL2j72wtS/qxBcfO/St8LCoH6F15G84CNxVtKY0s06YoOKh6cwjagWCcxcV0Pt6PGNZoRIcaLidgACCAVUHZgEqNnC5BGmTV7JpTEMiIQiD8xqJiybjtkJmpizfjjgbHWQkyPG+UziDNIKiJKaWpL4tw1TrUqABkNVk3tBskiHxDEyUfNqspSbJ1lIkXzKyuA4KAoJrO0ul76gnQX99u1oD6pxuaTEtUUhmOb/V0IyWjfiEThGrXS4thZWkYtwOiu2SiRjkjgdbylxAwHkBIsiK/NgOOkDn6yTbWj4Y3BxRyyaxGh0gXz539UZBzOuT73Q7WeMLuHB7QpZWIbve+fyNBj4fhT0W1vPEMqm9F0oCe35NSteJw9KYprc9vD+oTq/H7rMU3SRJp4koT/n2N7nrWap6tns+U8heA65qfutwWqhiRp94vnj5a6kIJYyG1516FrOwRR++Xt2+8V568I/rWZauozZfCc2VgCYrvQx29zYmLshHkTeFf6X95GdBE35VQrWyUYVIngQsSe216FyYSSOYizONEYGcz8JSEBG2oOom82UCEciou1i27eN8QSSKE3hdM56X6+zvxznIJxnaXiB2LR55WQc66TwtpvtVgZchu4L71yBxjL8V4wxMeioefYx/G/P4M/rngp8e4nZcK1JZtkcWloXrYCvCd7kmrdsB34rDRAGbmKENo0IO7CBxYbNHYrU9+/57FiRFW5R5Fk96f1qxRMJojtcOMcaGPHzNar5GWG7PZThNZ+Wi+2reH0Wcpsas7mToZvEYPIbF7n4hRlg/tf2kVAvw9Du8OefdTA</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../posture_identification/">
+<span class="md-ellipsis">
+    姿势识别模块
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../yolo_detection/">
+<span class="md-ellipsis">
+    YOLO目标检测模块
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_3" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../scripts/">
+<span class="md-ellipsis">
+    脚本
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_3" id="__nav_3_label" tabindex="0">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_3_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_3">
+<span class="md-nav__icon md-icon"></span>
+            脚本
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../scripts/yolo_train/">
+<span class="md-ellipsis">
+    YOLO 目标检测模型训练
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_4" type="checkbox"/>
+<div class="md-nav__link md-nav__container">
+<a class="md-nav__link" href="../../blog/">
+<span class="md-ellipsis">
+    记录
+    
+  </span>
+</a>
+<label class="md-nav__link" for="__nav_4" id="__nav_4_label" tabindex="0">
+<span class="md-nav__icon md-icon"></span>
+</label>
+</div>
+<nav aria-expanded="false" aria-labelledby="__nav_4_label" class="md-nav" data-md-level="1">
+<label class="md-nav__title" for="__nav_4">
+<span class="md-nav__icon md-icon"></span>
+            记录
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item md-nav__item--nested">
+<input class="md-nav__toggle md-toggle md-toggle--indeterminate" id="__nav_4_2" type="checkbox"/>
+<label class="md-nav__link" for="__nav_4_2" id="__nav_4_2_label" tabindex="0">
+<span class="md-ellipsis">
+    时间线
+    
+  </span>
+<span class="md-nav__icon md-icon"></span>
+</label>
+<nav aria-expanded="false" aria-labelledby="__nav_4_2_label" class="md-nav" data-md-level="2">
+<label class="md-nav__title" for="__nav_4_2">
+<span class="md-nav__icon md-icon"></span>
+            时间线
+          </label>
+<ul class="md-nav__list" data-md-scrollfix="">
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../blog/archive/2025/03/">
+<span class="md-ellipsis">
+    三月 2025
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../blog/archive/2024/09/">
+<span class="md-ellipsis">
+    九月 2024
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../blog/archive/2024/07/">
+<span class="md-ellipsis">
+    七月 2024
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../blog/archive/2024/04/">
+<span class="md-ellipsis">
+    四月 2024
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</li>
+</ul>
+</nav>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../about/">
+<span class="md-ellipsis">
+    关于
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../../comments/">
+<span class="md-ellipsis">
+    讨论
+    
+  </span>
+</a>
+</li>
+</ul>
+</nav>
+</div>
+</div>
+</div>
+<div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
+<div class="md-sidebar__scrollwrap">
+<div class="md-sidebar__inner">
+<nav aria-label="目录" class="md-nav md-nav--secondary" style="display:none">ieRKHA8jmqFMoyD9yX2lVw==;6pQ+8J90fIGPwXt1hAOyQzJpU8hR4gjUpGJBXOCL/susDA3c2B6Rub1Mot3QJoYrS6+cFbFqiNoBeGC+esGZgES/LI8FSvq79x6dPNWR3HBSLwH5qrk2H7qVi7Y5zQGAGRbhcQ68dyUSAjGn6tN3b6MXF8NufULKNHCL0hBG+mapcIvoO2uGOtkxQsgz+2lfdNt95u4nvQMwWD/xR1Qobp2ZYYG39nzFP1u+K0+DC3FoCG+KMdGDWyrOa79o6GuEjnDVq+70rtGrsqWqa+w7lM6Z2Jmh3Jj+0fGZC/3KI6cXWtzqNDTeGplEpqtYm90uQaET5GQo+s9pLjZnQx6zjrCElfoBwP5SUeAAowmkWc8X/h5s5C6+B0jT2N4ohlBVBivozNdyTE2qidXH/NoOqRIRFFOvMLpsvZT59KOD/cR9SQ9WjYOOb2CEHho7v+acVQ1Tja8Y44ltMWQ+uoi7c6y8+eIh5Vmuly2bvuBvKmh0iDFOE8VlCGZR7TtgoINhIGI+9yw2C4tDfHIqAhTTOa1NWSu02aPUi275eAic+xMp/9wlUHcX0M46U+MN9MN+lW8yU2RIuKDBYw25yvUxS3yhxOePq40M2IT14XiXtHq2QdU2bDav9bPV2DxqXHsCYL25jZ09VJtemOWwpyfH9jhVAxjgHxdiaTB0ralVoybNVpuD6cyd5qs9iInmo3zgkonLefkeUzhER/nqgRGXFexNA36QQnihd9gN/ifLIxJu2+obDZbMieN4jGTGFtwoal++E+cYMtK3zHJV7hH8u++a390jtw9hzsCdwfIehkNT1R04263AmP1HotT/FRODEXczkj56Npc0vIKHNQvj/AfxaLxGb2KgMVA451GV/Yj0tlCHYj/Dya2rko9nYS0pDgD1cHqHRSD0in0bgvslustjJ+L+0ENFpSunxAnZkE4n4gC/u2PHXn3mNNp9Fupq</nav>
+</div>
+</div>
+</div>
+<div class="md-content" data-md-component="content">
+<article class="md-content__inner md-typeset">
+<div id="mkdocs-encrypted-content" style="display:none">ZxZqjICM+P/X3SUxb6O5Rw==;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</div>
+<div id="mkdocs-decrypted-content">
+<form class="md-content__inner md-typeset" id="mkdocs-decrypt-form">
+<h1>限制访问！</h1>
+<p>此内容为涉及核心代码，非基地内成员禁止访问！如需访问该网站内容，请输入正确口令。<br/>填空：阻 _ _ 行</p>
+<input class="md-input" id="mkdocs-content-password" placeholder="请输入口令" type="password"/>
+<button class="md-button md-button--primary" id="mkdocs-decrypt-button">➜</button>
+<p id="mkdocs-decrypt-msg"></p>
+</form>
+</div>
+<script type="text/javascript">
+var encryptcontent_id = "encryptcontent_1";
+var encryptcontent_path = "vision-docs-site/modules/pointing_gesture_recognition/";
+var decryption_failure_message = "\u26a0 \u9519\u8bef\uff01";
+var encryptcontent_keystore = ["V5qxW7ZTSB4NfLPzogKnEg==;cZLZ7cmvfv0hJ4Tk7dQWYFYMfzco0+DMXRkqchp5WFDAvaRfxYu2c4QMqXC1sTtTstuHmSBh3OTesJGI+Qme/oru4+u136G7s3L2e9eEMTHNSBPO2hanfyMnEvEl67b1;LWujlVnbbu84B7nE0zzOcw==", "Ph/MUd72c1EnryI5mHDG3w==;SExcaYvLUcDeyLVmy7IuMfZpPVagQW6smQ5JvlFDCUn2FiF8CNmWpnCVs5m062zhPcknM1ILzjSvEAwdmiksHnmflLANthOex/2cwTHUkKZU8NqdyVbJzI8tqehvt8gZ;23dG/N15RlKnCHLRjucBbw==", "ZijiriJq9fkuDGtDtsU4BA==;KjkmNCUCrzPP6edPiKszxBZEgBEhjCYSDptb4h2i7tRkSrjJNs9xmwcdQjDxUbDztyuscicE4xuk3sTaUBUxzQRJXggg6iU6NesZc1GKoH7rZzxhQ2P3D6dzvTE+zEnq;Oq19KUaW99MC1N9nQ8AcJA==", "pZrGEa4R/XXLNjv2LMUQWw==;ScGxEw8UIPEXwF0QrqDRcth9nEVqtZJRR6Jat7OJ5gFOZh5KdigZAnUwVVBZV+CvMjr8j+kHKZwDBuNnqCvU9VOnibcicTc5NeskM01QnuPhcCLN4fT9qit8WOni3qrQ;/mxkULWcfBtOma0bZGNEXA=="];
+var encryptcontent_obfuscate = 0;
+
+</script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/core.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/enc-base64.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/cipher-core.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/sha256.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/hmac.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/pbkdf2.js" type="text/javascript"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/crypto-js/4.2.0/aes.js" type="text/javascript"></script>
+<script defer="" src="../../assets/javascripts/decrypt-contents.js" type="text/javascript"></script>
+</article>
+</div>
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+</div>
+<button class="md-top md-icon" data-md-component="top" hidden="" type="button">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"></path></svg>
+  回到页面顶部
+</button>
+</main>
+<footer class="md-footer">
+<nav aria-label="页脚" class="md-footer__inner md-grid" hidden="">
+<a aria-label="上一页: 手势识别模块" class="md-footer__link md-footer__link--prev" href="../gesture_recognition/">
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"></path></svg>
+</div>
+<div class="md-footer__title">
+<span class="md-footer__direction">
+                上一页
+              </span>
+<div class="md-ellipsis">
+                手势识别模块
+              </div>
+</div>
+</a>
+<a aria-label="下一页: 姿势识别模块" class="md-footer__link md-footer__link--next" href="../posture_identification/">
+<div class="md-footer__title">
+<span class="md-footer__direction">
+                下一页
+              </span>
+<div class="md-ellipsis">
+                姿势识别模块
+              </div>
+</div>
+<div class="md-footer__button md-icon">
+<svg viewbox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"></path></svg>
+</div>
+</a>
+</nav>
+<div class="md-footer-meta md-typeset">
+<div class="md-footer-meta__inner md-grid">
+<div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" rel="noopener" target="_blank">
+      Material for MkDocs
+    </a>
+</div>
+</div>
+</div>
+</footer>
+</div>
+<div class="md-dialog" data-md-component="dialog">
+<div class="md-dialog__inner md-typeset"></div>
+</div>
+<script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate", "navigation.tracking", "navigation.tabs", "navigation.indexes", "navigation.top", "content.code.copy", "content.code.annotate", "navigation.footer", "navigation.sections", "navigation.expand", "navigation.path", "toc.follow", "content.tooltips"], "search": "../../assets/javascripts/workers/search.f8cc74c7.min.js", "tags": null, "translations": {"clipboard.copied": "\u5df2\u590d\u5236", "clipboard.copy": "\u590d\u5236", "search.result.more.one": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.more.other": "\u5728\u8be5\u9875\u4e0a\u8fd8\u6709 # \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.none": "\u6ca1\u6709\u627e\u5230\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.one": "\u627e\u5230 1 \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.other": "# \u4e2a\u7b26\u5408\u6761\u4ef6\u7684\u7ed3\u679c", "search.result.placeholder": "\u952e\u5165\u4ee5\u5f00\u59cb\u641c\u7d22", "search.result.term.missing": "\u7f3a\u5c11", "select.version": "\u9009\u62e9\u5f53\u524d\u7248\u672c"}, "version": null}</script>
+<script src="../../assets/javascripts/bundle.c8b220af.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+<script src="../../theme/js/zoom.js"></script>
+</body>
+</html>
