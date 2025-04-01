@@ -8,7 +8,7 @@
 <meta content="RonaldLN" name="author"/>
 <link href="https://NPU-Home.github.io/vision-docs-site/modules/" rel="canonical"/>
 <link href=".." rel="prev"/>
-<link href="face_identification/" rel="next"/>
+<link href="yolo_detection/" rel="next"/>
 <link href="../image/ico.png" rel="icon"/>
 <meta content="mkdocs-1.6.1, mkdocs-material-9.6.10" name="generator"/>
 <title>Python模块 - 视觉文档</title>
@@ -146,17 +146,6 @@
         </a>
 </li>
 <li class="md-tabs__item">
-<a class="md-tabs__link" href="../about/">
-        
-  
-  
-    
-  
-  关于
-
-      </a>
-</li>
-<li class="md-tabs__item">
 <a class="md-tabs__link" href="../comments/">
         
   
@@ -164,6 +153,28 @@
     
   
   讨论
+
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../code-conventions/">
+        
+  
+  
+    
+  
+  规范
+
+      </a>
+</li>
+<li class="md-tabs__item">
+<a class="md-tabs__link" href="../about/">
+        
+  
+  
+    
+  
+  关于
 
       </a>
 </li>
@@ -221,33 +232,9 @@
           </label>
 <ul class="md-nav__list" data-md-scrollfix="">
 <li class="md-nav__item">
-<a class="md-nav__link" href="face_identification/">
+<a class="md-nav__link" href="yolo_detection/">
 <span class="md-ellipsis">
-    人脸识别模块
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="face_orientation_recognition/">
-<span class="md-ellipsis">
-    人脸朝向识别模块
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="gesture_recognition/">
-<span class="md-ellipsis">
-    手势识别模块
-    
-  </span>
-</a>
-</li>
-<li class="md-nav__item">
-<a class="md-nav__link" href="pointing_gesture_recognition/">
-<span class="md-ellipsis">
-    指向手势识别模块
+    YOLO目标检测模块
     
   </span>
 </a>
@@ -261,9 +248,33 @@
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="yolo_detection/">
+<a class="md-nav__link" href="pointing_gesture_recognition/">
 <span class="md-ellipsis">
-    YOLO目标检测模块
+    指向手势识别模块
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="gesture_recognition/">
+<span class="md-ellipsis">
+    手势识别模块
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="face_orientation_recognition/">
+<span class="md-ellipsis">
+    人脸朝向识别模块
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="face_identification/">
+<span class="md-ellipsis">
+    人脸识别模块
     
   </span>
 </a>
@@ -374,17 +385,25 @@
 </nav>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../about/">
+<a class="md-nav__link" href="../comments/">
 <span class="md-ellipsis">
-    关于
+    讨论
     
   </span>
 </a>
 </li>
 <li class="md-nav__item">
-<a class="md-nav__link" href="../comments/">
+<a class="md-nav__link" href="../code-conventions/">
 <span class="md-ellipsis">
-    讨论
+    规范
+    
+  </span>
+</a>
+</li>
+<li class="md-nav__item">
+<a class="md-nav__link" href="../about/">
+<span class="md-ellipsis">
+    关于
     
   </span>
 </a>
@@ -397,13 +416,13 @@
 <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc">
 <div class="md-sidebar__scrollwrap">
 <div class="md-sidebar__inner">
-<nav aria-label="目录" class="md-nav md-nav--secondary" style="display:none">M1bewUWLhF5r3ao7hDhW9w==;xLY8fgf//37Gfi5On0pi3cJKKq/LjB6JomFKkIW1RXeAq08pO7cB/+3amgP8n1rZ/iiQUgnvyIU8LakwCXHQTI6a5ruBh/+YlLCzcQ54NYjDloBG6nmYas9dhPZ/xGkMu03w5hGEXgU7EsZo8jfhRxjMFrn0foyWoU3uoJfFFtAm2Sxk/rhFkN9+PkxnYQPPLKPEyB7hLUQgRy45XvTiY2L8oeMG3mk1/A8R0jvP2ZgWM5FjJXuT1NPWO+wkyfIof3Fu6Xwsfi9AA3X2TLQi9FuWKpsLRl3v91OE78atwApTzsUrY7F46MuvTRL3mryvCC0AdncXaqxewM4WGNc9gQwh746MqGApJW3X8eme1OF6sQWE4tAo2jn8DIyOB4LcGVkUANsUdhDKFzFNGKh3C1wFy/IlGayNWtBxnxpVkiCqri1Db6tO8Rxq582eWD3x2DeTfYuvwQ7ECZhptUxC4J5/wP3eRGN9oPe72MxDiU07uBaJ70TK+AvGgiDnSpWTaN/ahb3vnB/IFU6JNI8McChbbvukWDKHXkb1XkZEf0fOtaaiNftc82epZWRj9O7tF/1iGeHKKAEN2LDKVvqYVmIlCW0tuS7Af7pPrnuE7B6YYicx72x3Z8YFBaQ1ZHe6uTb37fV2LXbZZBh9wJBVu2JvasraVr12BbiIDV5RQGcUCJ2QHe3zelRktnAnrU7Fn93Tg29jakKiSvoRqYm+N1WDS7LMxx+1ej43TFvGKUWI8azwS+kv5bxdHkzbBH/MuTu+gEouNu0S+dvF3oq3Kf4znnWe5ywy6Z5LuM0TgRh1oQ7MaGCOjasXcL2BV/8GkECnwGFoIB8Jp7h4+PMMS45v3Rb9B/zG0Wsd/1p/Rz666eTbUYal4RmYkpSjURDeBmRYV11olQ4Bu/LsJOWTARcjuunZBE+2Gtnv8PV2uX8HtrBrOxiZCkoyFwnzj6ROPLlleE3FV0x32dDbmSG5or8kIIy/PB9CyzRnCX786UYVhKYPhq8YWWLBq2DHeScw0U12YBBkniSdw3R2AJVvHkyXfDDeEFWLco9Iw8gw+llt5BJSwB/98v+IGhQwo1Ro4Hsf1G3zelRkbwG1bbiRsonH7Q4QvT3yqMvN9PTnSym6Ypky8nXBDfJYItroDb923W/VYylBEKN1ZFuZ9tNvXbJQN9kgCqpIX6MCM7Ohb7H2bEKs/dvE9xdUbGnoXic2xIX9tUei0PcF8mKIEeAQ1b04ecrW/NjihlKSlZrWfCDSmeLCF4idlArCTsIuzakB3Hw5OAdCJsBba5/fWCapwY5PgluXI0bRmRRM1hUmEYlKUvu/0msqH+ftVy+8e9psAR1ERVLMMk7h9qCp1Gwl6cTc7hhc9eAz9KFTKYmFO1Q=</nav>
+<nav aria-label="目录" class="md-nav md-nav--secondary" style="display:none">dDyxFXH/dYqdvZpnEb3A+A==;8Ya0YbyDbWwCd9/TANsxApYNAuNxvs2X5agco+IIxLlvypCGdhpnuzQjqSPsIgWzGCSAalp/RmCegTmllMKNLPolNEapIdkD3eHQzdCox4NIna05Fi7UNpb7hfx/W9qB598JWCrph87djI+goBpu+kDYa5Q8kOMf3JgrdNapKFRvLXutYqHp4nrVggErNUFMfn2klYmR9yEAcKWQZinaqbK30xdJg0cllO0NCbR4uTcoRf7dncqVxnlN0QftCUc82Z++3du8PpWcgi3XlpVID373UaN5ypg09BSl9K12C75wi0k66sDAOFc86skBKWVKptWHXMO/vYaWQ8X73EKr7ChA7sLS+/e8QL21sFK6Bb8/WYPlnWemFTnCWhKofujoZPnd3L+4JFmnBfitydl2tXWzul/9SqOFXBrbmQLlyMEqAWIkgOMMOB/vVPUyBKHB8Vyv385k+KJ0HOGwvRtUkVBHImaBnwILY0/vfq6SBWpMlGLBghZgs54XHTToCIzfVOIcxJY0Viv7gkfE0xRJkzLbQ1tEWe7PuFF1AvVgEd1zesyrVbzEf714wq7SsGm91aSDHws9SFIXtJAciKlawjNq5BrsI0U4eLrGPf4TGyW3je9wVvASXWViVnmBIAdMh5VwP+LeroZjKu9RoSxGxg6Gnk7hSFfLcWagBJLuQFLhtSnCmdJhWBFhHDWDlZvvCxn7KwS/GF8ibGE+DhddW5wnTxRefBPcSOsuPHWM0sCtdNOctYmwk++8KJnniJ3nRGVhbZWENemyBQd3NMIgsx4o5KYvU50Z1WzpoqTY84eO5mmGzQooRxGiIzXlAU66apbM/mCXXSrHHOJWOosJgaYXsBFuW+Lw9UPvc1887bWAO7uJO+H0x4ud1jAsw/LHTuN8artw4EqFL2/WtALN+cCiakme7N1cKlbEnwptp9FTbCEq4OJ8pcz7L5iP7ROtGnHH9znqlZEwWx4NooH+rwILEpMpxoGC41z7TgonEqDAlE6xPaGx/VuxbOjmBipc02qUJYlULY08clp81eQFyOk2guh+miKyb5MSZVq531EKDtmCNUvwdNyanFyvwKzMd56Kppt68vmu3p+zJJ3UT3zins+ZSEL7d+CfHTKQRlPL0d3uJZANxDHvKReqdP8YEPU8KjoJndZScDtbDkMN9tKNMJeIypWG7LiFJQTMJzbofoFuvWa1GCiSQjIrv+8yu8VnmG/R5xl4fGeYIkxZeZ3FbBaoUi2GptN3NdUXWVAUhjKjue3OvP52ztnS63OqRIPOFpbCt1c2IdNfWJxwX+nIVMldDEPf5awbSyDpm3zwpuzI8J3e8aMzYzOQbnD6p44ZXI7GVGrDJusjYSY0nrK8RamETf6tgfGN5YmT0rs=</nav>
 </div>
 </div>
 </div>
 <div class="md-content" data-md-component="content">
 <article class="md-content__inner md-typeset">
-<div id="mkdocs-encrypted-content" style="display:none">WklKjMplhUclD/46j/cI1w==;qvizOlpf6QK8OJRxvU/HIa4dKIwhmNPYGIS8xzHogw8VQSXvAOkoUy4ob38IAdMueQ+BXqkTN8+o11bYPg665lEYIMeNNtXa0lqnW5jGrT1UfuOlrS4SWqITLQKdm+zoQIG3QEN4MZqzKtUdya90IKfmtXzdZo2wiMe6RxVs8XFTOF3sdbJXaB/RQsjVHsckyimT4TPD5fKvneFqEfD8r6wvlLlSKYMMUW7iS+nohgGRux3SUC7vbfHEuz4KvvMBwqv34QX+jDjV8MGDEQzPEWjRMiRduWzKtJLEX/kd74z5+D/jcH2JP/YIWSYoWIL5tN9s4EwHywnVINVZuC6fsn81VoFd40urH8T0U1G7S8oKP1z58zamQrL7UrBb2lmevcHYrlln8tHsLOTn30jd/UMHbfYLRxs+rXPQuGTDUWfDHkasF8J2zNTJze3Mw3o6QuT28XYidHhVEbXK3lr1uAuQ305La10kQvbZj1JKlYxZPFTnAdjIRHE1+0NDtw4BMXd2FyeBmhV26A9RQPESOORAsoc5i3Tt0J425H3xo7GzeeekdaM3o/FyPyTzYPz6pz6GDFziQlY68MnAP0y7ModTAoIL/1cqb+/sp+h9tMsAMf5vhswbdCCD297tSeUgxV6hJ/WDFD7wmblqv7kAHiLotbEII3bp+nLBa6mR1w5jOAZlCWjaDPsHWsRcfYTEPtWSYr7LTC+7xn9OVDxaJ6VVJEwJzC695NM68UELiCfIBZqvGDAutwyDs1zKQi2g3EPJFieoRzJNKrHa4tmJj/leU0HvetAHID65dgkIQrQPhuNBNK6suHDCfC+F2+jjoKpQqaXr73WxCpDjfHqv5NWyysxXhtH9SgBXOY+sUwdp67XuXIThsbw1JZl1TpadMaAQ4Ia3oXqisuh5oze4HueBU4vAh60uyHrix+GiqjWreFXKy3vZOQ/Ix82Aug85VEP5Bz5/P/hMwxxb12Xms+UNFZ+hJQktfP5R4fDvnNkN+Oj4bwvAmh3gvR5SqdCHSxpMy8mU1uoDe8zrz29XCPEJtIylVp4bub2ssXV79GIHTW/AHp/PTFqhOyFn2aAN3uRhvR6GXpFZSMgUVZTxCrda7UFvOJMPxCgOmEwP9DwgBunrjEFsoXmmQUTg5FxpAX/lUMcFH/awjKWLSyxSsPTJQaFFTE7lreobWAQuQbuO25c0FqFxGy/ZLcYrNG20Lh3R2LrFNcMynzOoCfdzSi40DKnO4a2uXvGHSd/WmzsOoI5ySZ1QZRUpY8YzTur6UnqhufU4gZt6YzvjdktSRvZ4wKtxi2G0PrkWP/D1RUaycYqy1I+TpSFWHJztL6T1Np9//iXSIqwnmCM+CTRUcheRmvieIVdCxAhxVJnf4R9ab/RwOBb9N+CnW83qg0gSud+UgN9nn2u9QpmE45B8/GUE4cBlChDtLO4pYvcbF6JEzOKQRQ3X9g+bfllmRTQ4ZbR51n1ZSuQ7T4lTs+ok3l2N0z98BJ4lTv0iJePL44iootghxNDtOH3hfOVvSAJG34euEgUFW5g9sNJHUhB+KtkQbP+D0RIDzzQV0uTciZ/DzxegwGdqS7DEXwlaxeOBSbCkDT+9mVYLhj/+iI4ELULaSsEyvIj4keCMkBka4n/Ektf5TwEKzaHxP1JsEC9Sb8e5Iib8Jtzq60H5hKTsABAGAljbZWc60dLe3n2SGLlR2aUzGmuqQeWjv3aF/2TfxaosdDhaui/xhTJrR9tKBgp8UIE2n3Y5YIeqikl4+HClqAsZ5LfoDurkLkkbZK8xfJI0RKMF3jUOqrQE7tcPG+PFOpMhXqhmXLxKoKBoViE7CPE8Opkc4+OeSO0ACGr0rQu5yiR+DrVDTARAhDEgyWj88GnuD9EUrnWODTpLx5I=</div>
+<div id="mkdocs-encrypted-content" style="display:none">DFZWxtjo5cYU9Bjg9AahWA==;uZxM6aWIQtu+7hDZobFQzngzDWCKkdmLsUUOxxjTsf8CifQH4oIx7JK/J18MU2mR19xLvjKgyTZyDHzhb85gXP4rsbL5ulD/M8YrXbw1q+g7JGILsDc0+wxG5LEEXyjApTHYPVixlWJF7PT3ArQvQ/4ARreE9dfFV3bY6RcSpz7tNCEdgTcbNrnr16LJ/GJnlUgtUycxmI2LRjO0yTocpgwC0IqLVMBomDD3rjeIpqIwJbmptVj/cZTXqDJ7m0a1Yu1TgbCiPSIllUcREWUapM/tsIHOFYMgY8OVE6JItU/q0vYqvVKYBILyIy5BEibWCLSMchrY+KRzpuElbQakw5/phJufm9+2D0tX/LBBHFiNPQbyR8h7TQcKh1l8kBI8iYH+7OfB/MjP/ysVaO751ChwZsl3kE7TnGQ/VtmhwVeORecYpn1s823GSpSZiOLjokec5EqruknIbeEmvkVNN3pekeKuWg/wXriqusv6N+q7SYnxqW9m9zH1EDruHRFJn9+FARdNiLJa9tfObCk0yizRpmeeymFV9ijpHjxKzslckFYD0LzOYyuEJ3an9JVNanHK5fszp5mWOF9Zw67LmeP48UlwnKKPWYjZmjvG+w24p1WIv57YjvCdwjtDccNLnIoM3/tnk0xDP/3Cp9qy6Webqf2EWWA0SRjx0LNvTX/iSNA8Y1tmWMzBsH+VD9kBSvyll3oinXi7DrgG9QGndyVScTsS21/9sD+N5wqBIgpl9CmiOEy+NPY0qUFKsZb32BOsupiVtn7vSLqOjuWWXTTWfYFbHJv71EL2gxjMVxTtR9d78GKPRrxAp0vI4BCSSdcU6NqzQ1Dv0cH8uifTO2qpLXdinKiYQP9Ql3zdWfpiH0lrVHHcs9u2Ik0qFSxs42CaBBqttiVoIKOZQ6aLcqdKvp4k0K2WiKJWQOzSpjGgsyNNBDl7ENZGgIQ+tiVlOh3DICfBsEyE5SJrYaT73gEsK1sF6Wml/1zkmxnh3AT+LIqItOdGzoLISRt5UdKlOCn/+uY6YCmXyEDIN2gXrF1pEyzkZ+U5aGz2voKzCa5P+tsbWN8h3iksoxxe59uz6k2F6zILXYSxp8hchQ7RyEcc/4IsU9NIdqNxJZER9th6AuS3dpONNBqy8DJCAEPxucs9BnoemZ4z+TpLkCyqh6kTL3aC4lprGi/j56lS3/ycecr1sXFRFxJDcbqQyT3VQUoK7LvssPc30b9EAOgKjlo8QpwRc+MdS4X/rhLnZz98ndUtDUJ7xjsozS3Re4wHbL5gSxhwEidWDTk+TcaJtccaeRI+HsrGHgmLN0gf0FDELSoCSj9R2MzMrom8sqHfIxqYd6PGAbSjLyLup3R6UcrwN9wIqupDXfHvFv6kyOyct+K13VT6+NIuhyqHiRSCZdE1lpLjpMrHuEgpoB/x09m6ODlDz45hR3YmZvgE36cU0jBCJPmxL2ki5uoKcngkWYwX5azobCZN9/KxE4iwyhn8wsyywyXG+14PZ2fr2bJGCRGY1pOknufzOm3SCIOlAoTz/nlYRzf2SaMj6Pqn37H6xT+W0TzkwkUPKicKHndT+LaXRFrFH5YepIBiEZKqFM5JkigpTt8SoOBGoR1rZYvcrQf6iWu5dmv0OU6Wc8CI88C+vpGvUf36ePYMNQFFqJZs2PVwlCByLsYC5b5uuhhzKRoSZOq00E77ozSNqDIwdGXLLZsiv9mJ0jmwukXVmPJB+AMkTgzX249wca+3VzLBbvJmq1Qz7tpPbGBmG1v1cb9KaznV76mDZc0XZFWhAPDqBgJ2kgG7eDOUA6slrG9LlKB28V+gBUUudQSa++uKIh6X8fDxSoMnQMLkMAbVljm5Y15oARJpK4fhZBIC2uVAuHO7QKOZKKn57aGS7Us=</div>
 <div id="mkdocs-decrypted-content">
 <form class="md-content__inner md-typeset" id="mkdocs-decrypt-form">
 <h1>限制访问！</h1>
@@ -417,7 +436,7 @@
 var encryptcontent_id = "encryptcontent_1";
 var encryptcontent_path = "vision-docs-site/modules/";
 var decryption_failure_message = "\u26a0 \u9519\u8bef\uff01";
-var encryptcontent_keystore = ["MN6/k/j+e0XVMYZWtKVjMw==;HI7wkU+lUWbepJFGe6jJ0Z7LI+SlETizdDKYfTEzGNacf8YJKtUeLXi6+t/c/jvuUNZAg0UXwXXR75rDBxEI8ECZnjmIwJf5p489HSQa9jDixrXZDVB5+cfjClcdaCIy;s2eIpYJ1XdZOK4artmluFg==", "K84zg5954Qfs4oZa1r6XEA==;57Y6yLsT7mdk1kvJZNxxcTKHudOQzkLYy1TZ98t/RPBQxX1XDFJIY8GW1BMnP23/Zznt2f1rEgjRJ4RNiFPBGOjub7DulBi2fAFp+hcZyKoh8OYbzdd4r9LFYnxWU1E5;f05oPOTwHDiSzANW/zLthA==", "V/pEdOCq10SfVbD/KVsg7g==;G5bkqmPsLNlTGAD5/9evJ4eHVpH2bsVPvX81ZY/ioU60yQhHmV4S7ucIW9Hs10ps3aAPFUfzZ1RD9MGXgjqMgjm/4UZHM3mxmlQmeTp5pth+U2mu2lJAfbI4AyTpd8Wm;0bDkZ5d820ojOIkFf3ZOXQ==", "pubBy73x8eTWwtoQoWNhrQ==;tk4YwldFGmLuv5djHLXAiwLbWhopLBq2iUpqN61HQQz361nOROfCTK7I3GGFmfQhRhUZaFEooShjltYjZ0bDJ8Q2g36C+TGGsHdF/jLnJI+o30Q8y61O4c4DNSWlr1RU;/cFDh7bab3ZQx1n8r4dmZg=="];
+var encryptcontent_keystore = ["4AHOESMxw5Xh2gjgOQBDRw==;DVUqD6vJiY/8Scfu+ybU9+9xun82KdgVq3V+L4BIZ9oBnwfjrnZiVijc3y/IeuXlS5ywsihoApmY8+AdfIzjjUh52Se/XbiaUFyWvYRo0jKGWEIKe0rCHnWc60QmKPso;KjOJlMgi8kY9m8/bdhvUfg==", "ukY8gTIDGnrrqntw2/4tHw==;4LD9wXaJkajaTVk9FwZKw0MhQRNW54etnbhDnAKzzCtaIh59yjYhbR7zkKiuDXy5WgIPysF/3DHF02VTnn5my49I6FAnkGE/3KlRTEWgZ9qlwt5RASYxyFpVnkXrZBc0;q7VqO9CvU9MKCtEw+hSlrw==", "Mp4BboB36vKRSqP4MmCh4A==;N6okhosNvcs7OcXDxhCcUGlOHeLdoTKlL4hv3uhaKzCN6l1piF0Nqg0AM4U7sgM3GmraBsgU5D/ToL3lQweQKjpk9YitEN6qn4mQGL/DE6LHR5qUutKEgjqIYZ2roBGl;wHSY7SlECjJrBAf4vB6L5g==", "kijS09myzdLZ8C/RRV0Yig==;+nrP5eIIvaXMtNPRDdfWVb7pdP/AgLlNXZGQB2CkDcXb/WbmmF1D64+xKtu0yY7ts0HlPE+V3NGuxmsY4y9VQ5uBYkgfBJrrzpPWtnl1hRkh3WW0xtXFdR3t353KebG2;oWAiVk4lLAdFTTJa/5euoQ=="];
 var encryptcontent_obfuscate = 0;
 
 </script>
@@ -453,13 +472,13 @@ var encryptcontent_obfuscate = 0;
               </div>
 </div>
 </a>
-<a aria-label="下一页: 人脸识别模块" class="md-footer__link md-footer__link--next" href="face_identification/">
+<a aria-label="下一页: YOLO目标检测模块" class="md-footer__link md-footer__link--next" href="yolo_detection/">
 <div class="md-footer__title">
 <span class="md-footer__direction">
                 下一页
               </span>
 <div class="md-ellipsis">
-                人脸识别模块
+                YOLO目标检测模块
               </div>
 </div>
 <div class="md-footer__button md-icon">
