@@ -30,7 +30,7 @@
     padding: .15em .8em;
     color: var(--md-primary-bg-color);
     font-size: 90%;
-    background-color: var(--md-primary-bg-color);
+    background-color: var(--md-default-bg-color);
     -webkit-mask-repeat: no-repeat;
     mask-repeat: no-repeat;
     -webkit-mask-size: contain;
@@ -41,7 +41,7 @@
 }
 
 .md-typeset .collapse-code input~.code-footer label:hover {
-    background-color: var(--md-default-fg-color--light)
+    background-color: var(--md-code-bg-color)
 }
 
 .md-typeset .collapse-code input~.code-footer label::before {
@@ -52,7 +52,7 @@
     box-sizing: border-box;
     width: 1.25em;
     height: 1.25em;
-    background-color: var(--md-primary-fg-color);
+    background-color: var(--md-link-color);
     background-size: 1.25em;
     content: ""
 }
