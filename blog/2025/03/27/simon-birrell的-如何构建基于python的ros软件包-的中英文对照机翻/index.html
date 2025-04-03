@@ -50,6 +50,8 @@
     
       <link rel="stylesheet" href="../../../../../theme/css/import.css">
     
+      <link rel="stylesheet" href="../../../../../stylesheets/collapse-code.css">
+    
     <script>__md_scope=new URL("../../../../..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
     
       
@@ -57,7 +59,16 @@
     
     
     
-  </head>
+   <link href="../../../../../assets/stylesheets/glightbox.min.css" rel="stylesheet"/><style>
+    html.glightbox-open { overflow: initial; height: 100%; }
+    .gslide-title { margin-top: 0px; user-select: text; }
+    .gslide-desc { color: #666; user-select: text; }
+    .gslide-image img { background: white; }
+    .gscrollbar-fixer { padding-right: 15px; }
+    .gdesc-inner { font-size: 0.75rem; }
+    body[data-md-color-scheme="slate"] .gdesc-inner { background: var(--md-default-bg-color);}
+    body[data-md-color-scheme="slate"] .gslide-title { color: var(--md-default-fg-color);}
+    body[data-md-color-scheme="slate"] .gslide-desc { color: var(--md-default-fg-color);}</style> <script src="../../../../../assets/javascripts/glightbox.min.js"></script></head>
   
   
     
@@ -1417,12 +1428,12 @@
 <h3 id="a-working-example-you-can-download">A Working Example you can download<br>一个你可以下载的工作示例</h3>
 <p>Here’s a an example I threw together as an illustration, with one node, one script, one launch file, the main Python package and one sub-package.</p>
 <p>这里是一个我为了说明而拼凑的例子，包含一个节点、一个脚本、一个启动文件、主 Python 包和一个子包。</p>
-<p><img alt="python_ros_pkg_1" loading="lazy" src="../../../../images/python_ros_pkg_1.webp" /></p>
+<p><a class="glightbox" href="../../../../images/python_ros_pkg_1.webp" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="python_ros_pkg_1" loading="lazy" src="../../../../images/python_ros_pkg_1.webp" /></a></p>
 <p>You can see the code here <a href="https://github.com/SimonBirrell/simontest">https://github.com/SimonBirrell/simontest</a></p>
 <p>您可以在这里查看代码 <a href="https://github.com/SimonBirrell/simontest">https://github.com/SimonBirrell/simontest</a></p>
 <div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a>rosrun<span class="w"> </span>simontest<span class="w"> </span>simon_node1
 </code></pre></div>
-<p><img alt="python_ros_pkg_2" loading="lazy" src="../../../../images/python_ros_pkg_2.webp" /></p>
+<p><a class="glightbox" href="../../../../images/python_ros_pkg_2.webp" data-type="image" data-width="100%" data-height="auto" data-desc-position="bottom"><img alt="python_ros_pkg_2" loading="lazy" src="../../../../images/python_ros_pkg_2.webp" /></a></p>
 <p>Check out the code, paying attention to setup.py and the various __init__.py files. Figuring out what is being called when and how should give you a solid grounding for building robust and complex Python applications.</p>
 <p>查看代码，注意 setup.py 和各种 __init__.py 文件。弄清楚何时以及如何调用某些内容，这将为构建稳健且复杂的 Python 应用程序提供坚实的基础。</p>
 <p>If you want to download, build it and run the commands yourself:</p>
@@ -1605,8 +1616,8 @@
       
         <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
       
-        <script src="../../../../../theme/js/zoom.js"></script>
-      
     
-  </body>
+  <script id="init-glightbox">const lightbox = GLightbox({"touchNavigation": true, "loop": false, "zoomable": true, "draggable": true, "openEffect": "zoom", "closeEffect": "zoom", "slideEffect": "slide"});
+document$.subscribe(() => { lightbox.reload() });
+</script></body>
 </html>

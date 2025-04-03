@@ -24,7 +24,7 @@
 .md-typeset .md-button {
     margin-top: .5rem;
     margin-left: .5rem;
-    background-color: var(--md-code-bg-color);
+    background-color: var(--md-button-bg-color);
     color: var(--md-default-fg-color);
     border: var(--md-code-bg-color) solid 2px;
     border-radius: 1rem;
@@ -64,6 +64,8 @@
     margin-left: 0;
 }
 
-#width-pic:hover {
+#width-pic:hover,
+#width-pic:focus {
+    border: 2px solid var(--md-pic-shadow-color) !important;
     border-top: 0 !important;
 }
