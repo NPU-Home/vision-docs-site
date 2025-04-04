@@ -1161,76 +1161,17 @@
     <article class="md-content__inner md-typeset">
       
         
-<h1 id="azure-kinect">获取Azure Kinect摄像头的内参</h1>
-<p>由于同学需要摄像头的焦距等参数来将深度帧的数据转换成3维坐标系中的坐标，所以开始在网上搜索相应的方法</p>
-<blockquote>
-<p>一开始找到了这篇文章，</p>
-<p><a href="https://www.cnblogs.com/zkmjolnir/p/18043716">Azure Kinect 获取相机内参 - BuckyI - 博客园 (cnblogs.com)</a></p>
-<p>但是安装了pykinect_azure包后，运行文章中的代码出现了报错，就放弃参考这篇文章了</p>
-</blockquote>
-<!-- more -->
+  
 
-<p>找到了这个issue</p>
-<p><a href="https://github.com/isl-org/Open3D/issues/2071">Get intrinsic from Azure Kinect? · Issue #2071 · isl-org/Open3D (github.com)</a></p>
-<p><a href="https://github.com/isl-org/Open3D/issues/2071#issuecomment-669266271">theNded的回答</a>说道需要一个使用azure kinect摄像头录制的mkv文件，再使用Open3D中的 <code>azure_kinect_mkv_reader.py</code> 文件来解析mkv文件，会得到一个 <code>intrinsic.json</code> ，里面包含着摄像头的内参</p>
-<blockquote>
-<p>We need the mkv file recorded by AzureKinect to parse the calibration. It will be stored in a json file <code>intrinsic.json</code>, see <a href="https://github.com/intel-isl/Open3D/blob/master/examples/python/ReconstructionSystem/sensors/azure_kinect_mkv_reader.py#L60">https://github.com/intel-isl/Open3D/blob/master/examples/python/ReconstructionSystem/sensors/azure_kinect_mkv_reader.py#L60</a></p>
-<blockquote>
-<p>但他的回答中对应的文件的路径已经更改了，应该是</p>
-<p><a href="https://github.com/isl-org/Open3D/blob/main/examples/python/reconstruction_system/sensors/azure_kinect_mkv_reader.py#L60-L72">https://github.com/isl-org/Open3D/blob/main/examples/python/reconstruction_system/sensors/azure_kinect_mkv_reader.py#L60-L72</a></p>
-</blockquote>
-</blockquote>
-<p>于是克隆仓库，然后发现可以参考<a href="https://www.open3d.org/docs/release/tutorial/sensor/azure_kinect.html#open3d-azure-kinect-mkv-reader">Open3D官方文档的这个部分</a>进行操作。</p>
-<h2 id="azure-kinectmkv">使用Azure Kinect摄像头录制mkv视频</h2>
-<p>但是还需要使用azure kinect摄像头录制一个mkv文件，于是搜索如何进行录制，</p>
-<p>然后找到这篇文章</p>
-<p><a href="https://medium.com/@jiyaoz/how-to-record-using-azure-kinect-41cf49acccca">How to record using Azure Kinect. You can check out the official… | by Jo Jiyao Zhang | Medium</a></p>
-<p>文章中提到如果<strong>已经安装好Azure Kinect SDK</strong>(对于在linux上，安装好的标志应该是<strong>是否可以使用 <code>k4aviewer</code></strong> )，那么就可以使用 <code>k4arecorder</code> 来录制mkv视频，</p>
-<p>linux上可以运行类似下面这样的命令进行录制</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>k4arecorder<span class="w"> </span>-l<span class="w"> </span><span class="m">5</span><span class="w"> </span>path/to/output.mkv
-</code></pre></div>
-<blockquote>
-<p><code>-l</code> 参数指的是录制的时长，单位是<em>秒</em></p>
-</blockquote>
-<h2 id="mkv">解析录制好的mkv视频获取摄像头内参</h2>
-<p>参考<a href="https://www.open3d.org/docs/release/tutorial/sensor/azure_kinect.html#open3d-azure-kinect-mkv-reader">Open3D官方文档的这个部分</a>，在克隆的Open3D仓库根目录下，运行下面这个命令解析mkv</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python3<span class="w"> </span>examples/python/reconstruction_system/sensors/azure_kinect_mkv_reader.py<span class="w"> </span>--input<span class="w"> </span>~/output.mkv
-</code></pre></div>
-<p>但是只有显示没有输出，如果要输出出文件，要加上 <code>--output</code> 参数，例如</p>
-<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python3<span class="w"> </span>examples/python/reconstruction_system/sensors/azure_kinect_mkv_reader.py<span class="w"> </span>--input<span class="w"> </span>~/output.mkv<span class="w"> </span>--output<span class="w"> </span>frames
-</code></pre></div>
-<p><code>--output</code> 参数传入的值，会被解析成相对仓库根目录的路径(或许也可以传入绝对路径)，然后就可以在 <code>frames</code> 文件夹中找到 <code>intrinsic.json</code> 这个json文件。</p>
-<p>打开文件，发现是这样的内容</p>
-<div class="highlight"><span class="filename">intrinsic.json</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
-<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">&quot;color_mode&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MJPG_1080P&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">&quot;depth_mode&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NFOV_UNBINNED&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">&quot;height&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span>
-<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">&quot;intrinsic_matrix&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span>
-<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="p">[</span>
-<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="mf">915.332763671875</span><span class="p">,</span>
-<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="mf">0.0</span><span class="p">,</span>
-<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="mf">0.0</span><span class="p">,</span>
-<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="mf">0.0</span><span class="p">,</span>
-<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="mf">915.34014892578125</span><span class="p">,</span>
-<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">        </span><span class="mf">0.0</span><span class="p">,</span>
-<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">        </span><span class="mf">965.72125244140625</span><span class="p">,</span>
-<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="mf">538.07537841796875</span><span class="p">,</span>
-<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">        </span><span class="mf">1.0</span>
-<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="p">],</span>
-<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="nt">&quot;serial_number&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;000162502412&quot;</span><span class="p">,</span>
-<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="nt">&quot;stream_length_usec&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">5120700</span><span class="p">,</span>
-<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="nt">&quot;width&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span>
-<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="p">}</span>
-</code></pre></div>
-<p>但是不知道 <code>"intrinsic_matrix"</code> 中的数值都对应哪些参数，然后找到这个issue</p>
-<p><a href="https://github.com/isl-org/Open3D/issues/1823">Azure kinect intrinsic json structure (question) · Issue #1823 · isl-org/Open3D (github.com)</a></p>
-<p>根据<a href="https://github.com/isl-org/Open3D/issues/1823#issuecomment-998951345">theNded的回答</a>得知了 <code>intrinsic.json</code> 中参数的格式</p>
-<blockquote>
-<p>It is simply <code>[[fx, 0, 0], [0, fy, 0], [cx, cy, 1]]</code>. Open3D at current does not support other parameters in the pinhole camera model (esp. for the downstream applications) so the rest have been ignored.</p>
-</blockquote>
 
-<!-- Source file information -->
-<!--
+
+  
+  
+
+
+  
+  <h1 id="azure-kinect">获取Azure Kinect摄像头的内参</h1>
+  <!--
   Copyright (c) 2016-2025 Martin Donath <martin.donath@squidfunk.com>
 
   Permission is hereby granted, free of charge, to any person obtaining a copy
@@ -1318,24 +1259,85 @@
 
     <!-- Authors (git-authors plugin) -->
     
-      
-  
-  <span class="md-source-file__fact">
-    <span class="md-icon" title="贡献者">
-      
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="m21.7 13.35-1 1-2.05-2.05 1-1a.55.55 0 0 1 .77 0l1.28 1.28c.21.21.21.56 0 .77M12 18.94l6.06-6.06 2.05 2.05L14.06 21H12zM12 14c-4.42 0-8 1.79-8 4v2h6v-1.89l4-4c-.66-.08-1.33-.11-2-.11m0-10a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4"/></svg>
-      
-    </span>
-    <nav>
-      Ronald_Luo
-    </nav>
-  </span>
-
-    
 
     <!-- Authors (git-committers plugin) -->
     
   </aside>
+
+  
+<p>由于同学需要摄像头的焦距等参数来将深度帧的数据转换成3维坐标系中的坐标，所以开始在网上搜索相应的方法</p>
+<blockquote>
+<p>一开始找到了这篇文章，</p>
+<p><a href="https://www.cnblogs.com/zkmjolnir/p/18043716">Azure Kinect 获取相机内参 - BuckyI - 博客园 (cnblogs.com)</a></p>
+<p>但是安装了pykinect_azure包后，运行文章中的代码出现了报错，就放弃参考这篇文章了</p>
+</blockquote>
+<!-- more -->
+
+<p>找到了这个issue</p>
+<p><a href="https://github.com/isl-org/Open3D/issues/2071">Get intrinsic from Azure Kinect? · Issue #2071 · isl-org/Open3D (github.com)</a></p>
+<p><a href="https://github.com/isl-org/Open3D/issues/2071#issuecomment-669266271">theNded的回答</a>说道需要一个使用azure kinect摄像头录制的mkv文件，再使用Open3D中的 <code>azure_kinect_mkv_reader.py</code> 文件来解析mkv文件，会得到一个 <code>intrinsic.json</code> ，里面包含着摄像头的内参</p>
+<blockquote>
+<p>We need the mkv file recorded by AzureKinect to parse the calibration. It will be stored in a json file <code>intrinsic.json</code>, see <a href="https://github.com/intel-isl/Open3D/blob/master/examples/python/ReconstructionSystem/sensors/azure_kinect_mkv_reader.py#L60">https://github.com/intel-isl/Open3D/blob/master/examples/python/ReconstructionSystem/sensors/azure_kinect_mkv_reader.py#L60</a></p>
+<blockquote>
+<p>但他的回答中对应的文件的路径已经更改了，应该是</p>
+<p><a href="https://github.com/isl-org/Open3D/blob/main/examples/python/reconstruction_system/sensors/azure_kinect_mkv_reader.py#L60-L72">https://github.com/isl-org/Open3D/blob/main/examples/python/reconstruction_system/sensors/azure_kinect_mkv_reader.py#L60-L72</a></p>
+</blockquote>
+</blockquote>
+<p>于是克隆仓库，然后发现可以参考<a href="https://www.open3d.org/docs/release/tutorial/sensor/azure_kinect.html#open3d-azure-kinect-mkv-reader">Open3D官方文档的这个部分</a>进行操作。</p>
+<h2 id="azure-kinectmkv">使用Azure Kinect摄像头录制mkv视频</h2>
+<p>但是还需要使用azure kinect摄像头录制一个mkv文件，于是搜索如何进行录制，</p>
+<p>然后找到这篇文章</p>
+<p><a href="https://medium.com/@jiyaoz/how-to-record-using-azure-kinect-41cf49acccca">How to record using Azure Kinect. You can check out the official… | by Jo Jiyao Zhang | Medium</a></p>
+<p>文章中提到如果<strong>已经安装好Azure Kinect SDK</strong>(对于在linux上，安装好的标志应该是<strong>是否可以使用 <code>k4aviewer</code></strong> )，那么就可以使用 <code>k4arecorder</code> 来录制mkv视频，</p>
+<p>linux上可以运行类似下面这样的命令进行录制</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a>k4arecorder<span class="w"> </span>-l<span class="w"> </span><span class="m">5</span><span class="w"> </span>path/to/output.mkv
+</code></pre></div>
+<blockquote>
+<p><code>-l</code> 参数指的是录制的时长，单位是<em>秒</em></p>
+</blockquote>
+<h2 id="mkv">解析录制好的mkv视频获取摄像头内参</h2>
+<p>参考<a href="https://www.open3d.org/docs/release/tutorial/sensor/azure_kinect.html#open3d-azure-kinect-mkv-reader">Open3D官方文档的这个部分</a>，在克隆的Open3D仓库根目录下，运行下面这个命令解析mkv</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a>python3<span class="w"> </span>examples/python/reconstruction_system/sensors/azure_kinect_mkv_reader.py<span class="w"> </span>--input<span class="w"> </span>~/output.mkv
+</code></pre></div>
+<p>但是只有显示没有输出，如果要输出出文件，要加上 <code>--output</code> 参数，例如</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a>python3<span class="w"> </span>examples/python/reconstruction_system/sensors/azure_kinect_mkv_reader.py<span class="w"> </span>--input<span class="w"> </span>~/output.mkv<span class="w"> </span>--output<span class="w"> </span>frames
+</code></pre></div>
+<p><code>--output</code> 参数传入的值，会被解析成相对仓库根目录的路径(或许也可以传入绝对路径)，然后就可以在 <code>frames</code> 文件夹中找到 <code>intrinsic.json</code> 这个json文件。</p>
+<p>打开文件，发现是这样的内容</p>
+<div class="highlight"><span class="filename">intrinsic.json</span><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="p">{</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="w">    </span><span class="nt">&quot;color_mode&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;MJPG_1080P&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="w">    </span><span class="nt">&quot;depth_mode&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NFOV_UNBINNED&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="w">    </span><span class="nt">&quot;height&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1080</span><span class="p">,</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="w">    </span><span class="nt">&quot;intrinsic_matrix&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span>
+<a id="__codelineno-3-6" name="__codelineno-3-6" href="#__codelineno-3-6"></a><span class="w">    </span><span class="p">[</span>
+<a id="__codelineno-3-7" name="__codelineno-3-7" href="#__codelineno-3-7"></a><span class="w">        </span><span class="mf">915.332763671875</span><span class="p">,</span>
+<a id="__codelineno-3-8" name="__codelineno-3-8" href="#__codelineno-3-8"></a><span class="w">        </span><span class="mf">0.0</span><span class="p">,</span>
+<a id="__codelineno-3-9" name="__codelineno-3-9" href="#__codelineno-3-9"></a><span class="w">        </span><span class="mf">0.0</span><span class="p">,</span>
+<a id="__codelineno-3-10" name="__codelineno-3-10" href="#__codelineno-3-10"></a><span class="w">        </span><span class="mf">0.0</span><span class="p">,</span>
+<a id="__codelineno-3-11" name="__codelineno-3-11" href="#__codelineno-3-11"></a><span class="w">        </span><span class="mf">915.34014892578125</span><span class="p">,</span>
+<a id="__codelineno-3-12" name="__codelineno-3-12" href="#__codelineno-3-12"></a><span class="w">        </span><span class="mf">0.0</span><span class="p">,</span>
+<a id="__codelineno-3-13" name="__codelineno-3-13" href="#__codelineno-3-13"></a><span class="w">        </span><span class="mf">965.72125244140625</span><span class="p">,</span>
+<a id="__codelineno-3-14" name="__codelineno-3-14" href="#__codelineno-3-14"></a><span class="w">        </span><span class="mf">538.07537841796875</span><span class="p">,</span>
+<a id="__codelineno-3-15" name="__codelineno-3-15" href="#__codelineno-3-15"></a><span class="w">        </span><span class="mf">1.0</span>
+<a id="__codelineno-3-16" name="__codelineno-3-16" href="#__codelineno-3-16"></a><span class="w">    </span><span class="p">],</span>
+<a id="__codelineno-3-17" name="__codelineno-3-17" href="#__codelineno-3-17"></a><span class="w">    </span><span class="nt">&quot;serial_number&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;000162502412&quot;</span><span class="p">,</span>
+<a id="__codelineno-3-18" name="__codelineno-3-18" href="#__codelineno-3-18"></a><span class="w">    </span><span class="nt">&quot;stream_length_usec&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">5120700</span><span class="p">,</span>
+<a id="__codelineno-3-19" name="__codelineno-3-19" href="#__codelineno-3-19"></a><span class="w">    </span><span class="nt">&quot;width&quot;</span><span class="w"> </span><span class="p">:</span><span class="w"> </span><span class="mi">1920</span>
+<a id="__codelineno-3-20" name="__codelineno-3-20" href="#__codelineno-3-20"></a><span class="p">}</span>
+</code></pre></div>
+<p>但是不知道 <code>"intrinsic_matrix"</code> 中的数值都对应哪些参数，然后找到这个issue</p>
+<p><a href="https://github.com/isl-org/Open3D/issues/1823">Azure kinect intrinsic json structure (question) · Issue #1823 · isl-org/Open3D (github.com)</a></p>
+<p>根据<a href="https://github.com/isl-org/Open3D/issues/1823#issuecomment-998951345">theNded的回答</a>得知了 <code>intrinsic.json</code> 中参数的格式</p>
+<blockquote>
+<p>It is simply <code>[[fx, 0, 0], [0, fy, 0], [cx, cy, 1]]</code>. Open3D at current does not support other parameters in the pinhole camera model (esp. for the downstream applications) so the rest have been ignored.</p>
+</blockquote>
+
+
+
+
+  
+
+
 
       
     </article>
