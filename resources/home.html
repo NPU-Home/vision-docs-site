@@ -1,0 +1,262 @@
+<!-- Custom HTML site displayed as the Home chapter -->
+
+{% extends "main.html" %}
+{% block tabs %}
+{{ super() }}
+<style>
+
+    .md-main {
+        flex-grow: 0
+    }
+
+    .md-main__inner {
+        display: flex;
+        height: 100%;
+    }
+
+    .tx-container {
+        padding-top: .0rem;
+        background: linear-gradient(to bottom, var(--md-primary-fg-color), var(--md-link-color) 99%)
+    }
+
+    .tx-hero {
+        margin: 32px 2.8rem;
+        color: var(--md-primary-bg-color);
+        justify-content: center;
+    }
+
+    .tx-hero h1 {
+        margin-bottom: 1rem;
+        color: currentColor;
+        font-weight: 700
+    }
+
+    .tx-hero__content {
+        padding-bottom: 1rem;
+        margin: 0 auto;
+    }
+
+    .tx-hero__image{
+        width:17rem;
+        height:17rem;
+        order:1;
+        padding-right: 2.5rem;
+    }
+
+    .feature-item h3 svg {
+        fill: var(--md-default-fg-color);
+        height: 30px;
+        float: left;
+        margin-right: 10px;
+        transform: translateY(10%);
+    }
+
+    .top-hr {
+        margin-top: 42px;
+    }
+
+    .feature-item {
+        font-family: var(--md-text-font);
+        font-weight: 300;
+        box-sizing: border-box;
+        padding: 0 15px;
+        word-break: break-word
+    }
+
+    @media screen and (max-width:30em) {
+        .tx-hero h1 {
+            font-size: 1.4rem
+        }
+    }
+
+    @media screen and (min-width:60em) {
+        .md-sidebar--secondary {
+            display: none
+        }
+
+        .tx-hero {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .tx-hero__content {
+            max-width: 22rem;
+            margin-top: 3.5rem;
+            margin-bottom: 3.5rem;
+            margin-left: 1.0rem;
+            margin-right: 4.0rem;
+            align-items: center;
+        }
+    }
+
+    @media screen and (min-width:76.25em) {
+        .md-sidebar--primary {
+            display: none
+        }
+
+        .top-hr {
+            width: 100%;
+            display: flex;
+            max-width: 61rem;
+            margin-right: auto;
+            margin-left: auto;
+            padding: 0 .2rem;
+        }
+
+        .bottom-hr {
+            margin-top: 10px;
+            width: 100%;
+            display: flex;
+            max-width: 61rem;
+            margin-right: auto;
+            margin-left: auto;
+            padding: 0 .2rem;
+        }
+
+        .feature-item {
+            flex: 1;
+            min-width: 0;
+        }
+    }
+
+    .hr {
+        border-bottom: 1px solid #eee;
+        width: 100%;
+        margin: 20px 0;
+    }
+
+    .text-center {
+        text-align: center;
+        padding-right: 15px;
+        padding-left: 15px;
+        margin-right: auto;
+        margin-left: auto;
+        margin-top: 15px;
+        font-family: 'Lato', sans-serif;
+        font-size: 23px;
+        font-weight: 300;
+        padding-bottom: 10px;
+    }
+
+    .logos {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        flex-flow: row wrap;
+        margin: 0 auto;
+    }
+
+    .logos img {
+        flex: 1 1 auto;
+        padding: 25px;
+        max-height: 130px;
+        vertical-align: middle;
+    }
+
+    .hr-logos {
+        margin-top: 0;
+        margin-bottom: 30px;
+    }
+
+    .md-footer-meta__inner {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-between;
+        margin-top: 1.0rem;
+    }
+
+    .md-footer-social {
+        padding-top: 20px;
+    }
+
+    .md-typeset img, .md-typeset video {
+        box-shadow: initial;
+        border: initial;
+        max-width: 110%;
+    }
+</style>
+
+<!-- Main site Entry button descriptions -->
+<section class="tx-container">
+    <div class="md-grid md-typeset">
+      <div class="tx-hero">
+        <div class="tx-hero__image">
+          <img src="assets/azure-kinect-sensor.webp" draggable="false">
+        </div>
+        <div class="tx-hero__content">
+          <h1>
+            视觉技术文档
+            <br>
+            <p align="center">
+                <span class="twemoji">
+                    {% include ".icons/material/camera-iris.svg" %} 
+                </span>·<span class="twemoji">
+                    {% include ".icons/material/eye.svg" %} 
+                </span>·<span class="twemoji">
+                    {% include ".icons/material/camera.svg" %} 
+                </span>·<span class="twemoji">
+                    {% include ".icons/material/video-image.svg" %} 
+                </span>
+            </p>
+          </h1>
+          <a href="{{ page.next_page.url | url }}" class="md-button md-button--primary">
+            开始查看文档
+          </a>
+          <a href="blog/" class="md-button">
+            查看记录博客
+          </a>
+        </div>
+      </div>
+    </div>
+</section>
+
+<!-- Main site box descriptions -->
+<div class="top-hr">
+    <div class="feature-item">
+        <div class="md-grid md-typeset">
+            <h3>基地网站</h3>
+            <p>
+                <a href="https://npu-home.github.io" class="md-button" id="width-left">
+                    <span class="twemoji">
+                        {% include ".icons/material/home.svg" %} 
+                    </span>
+                    基地官网：NPU-舞蹈机器人基地
+                </a>
+                <a href="https://github.com/NPU-Home" class="md-button" id="width-left">
+                    <span class="twemoji">
+                        {% include ".icons/material/github.svg" %} 
+                    </span>
+                    家政组软件仓库：NPU-Home
+                </a>
+            </p>
+        </div>
+    </div>
+    <div class="feature-item">
+        <div class="md-grid md-typeset">
+            <h3>文档仓库</h3>
+            <p>
+                <a href="https://github.com/NPU-Home/vision-docs" class="md-button" id="width-left">
+                    <span class="twemoji">
+                        {% include ".icons/material/book.svg" %} 
+                    </span>
+                    文档仓库：vision-docs
+                    <span class="twemoji">
+                        {% include ".icons/octicons/lock-24.svg" %} 
+                    </span>
+                </a>
+                <a href="https://github.com/NPU-Home/vision-docs-site" class="md-button" id="width-left">
+                    <span class="twemoji">
+                        {% include ".icons/material/web.svg" %} 
+                    </span>
+                    网站源代码：vision-docs-site
+                </a>
+            </p>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}
+{% block content %}{% endblock %}
+{% block footer %}{% endblock %}
