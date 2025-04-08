@@ -1387,6 +1387,39 @@
 </ol>
 </div>
 </div>
+<div class="admonition info">
+<details class="quote">
+<summary>为什么要使用Git<div style="float:right">摘自<a href="https://nju-projectn.github.io/ics-pa-gitbook/ics2021/git.html">git入门教程 - 南京大学 计算机科学与技术系 计算机系统基础 课程实验 2021</a></div></summary>
+<p>想象一下你正在玩Flappy Bird, 你今晚的目标是拿到100分, 不然就不睡觉. 经过千辛万苦, 你拿到了99分, 就要看到成功的曙光的时候, 你竟然失手了! 你悲痛欲绝, 滴血的心在呼喊着, "为什么上天要这样折磨我? 为什么不让我存档?"</p>
+<p>想象一下你正在写代码, 你今晚的目标是实现某一个新功能, 不然就不睡觉. 经过千辛万苦, 你终于把代码写好了, 保存并编译运行, 你看到调试信息一行一行地在终端上输出. 就要看到成功的曙光的时候, 竟然发生了段错误! 你仔细思考, 发现你之前的构思有着致命的错误, 但之前正确运行的代码已经永远离你而去了. 你悲痛欲绝, 滴血的心在呼喊着, "为什么上天要这样折磨我?" 你绝望地倒在屏幕前... 这时, 你发现身边渐渐出现无数的光玉, 把你包围起来, 耀眼的光芒令你无法睁开眼睛... 等到你回过神来, 你发现屏幕上正是那份之前正确运行的代码! 但在你的记忆中, 你确实经历过那悲痛欲绝的时刻... 这一切真是不可思议啊...</p>
+<p><h2>人生如戏, 戏如人生</h2></p>
+<p>人生就像不能重玩的Flappy Bird, 但软件工程领域却并非如此, 而那不可思议的光玉就是"版本控制系统". 版本控制系统给你的开发流程提供了比朋也收集的更强大的光玉, 能够让你在过去和未来中随意穿梭, 避免上文中的悲剧降临你的身上.</p>
+<p>没听说过版本控制系统就完成实验, 艰辛地排除万难, 就像游戏通关之后才知道原来游戏可以存档一样, 其实玩游戏的时候进行存档并不是什么丢人的事情.</p>
+<p>在实验中, 我们使用 <code>git</code> 进行版本控制. 下面简单介绍如何使用 <code>git</code> .</p>
+<p><h3>游戏设置</h3></p>
+<p>...</p>
+<p><h3>查看存档信息</h3></p>
+<p>...</p>
+<p><h3>存档</h3></p>
+<p>你可以像以前一样编写代码. 等到你的开发取得了一些阶段性成果, 你应该马上进行"存档".</p>
+<p>...</p>
+<p><h3>读档</h3></p>
+<p>如果你遇到了上文提到的让你悲痛欲绝的情况, 现在你可以使用光玉来救你一命了. 首先使用 <code>git log</code> 来查看已有的存档, 并决定你需要回到哪个过去. 每一份存档都有一个hash code, 例如 <code>b87c512d10348fd8f1e32ddea8ec95f87215aaa5</code> , 你需要通过hash code来告诉 <code>git</code> 你希望读哪一个档. 使用以下命令进行读档...</p>
+<p><h3>第三视点</h3></p>
+<p>...</p>
+<p>不同的分支之间不会相互干扰, 这也给项目的分布式开发带来了便利. 有了分支功能, 你就可以像第三视点那样在一个世界的不同时间(一个分支的多个存档), 或者是多个平行世界(多个分支)之间来回穿梭了.</p>
+<p>...</p>
+</details>
+<details class="quote">
+<summary>为什么要使用<code>.gitignore</code><div style="float:right">摘自<a href="https://pku-minic.github.io/online-doc/#/preface/prerequisites?id=如何使用-git"><code>如何使用 Git</code> - 前置知识 - 北大编译实践在线文档</a></div></summary>
+<p>...</p>
+<p>上面提到了 <code>.gitignore</code> 可以让 Git 忽略目录中某些文件, 且不让它们出现在 Git 仓库中. 这有什么用呢?</p>
+<p>你在开发过程中难免会产生一些 <strong>“只对你自己有用”</strong> 且 <strong>“不值得永久保留”</strong> 的东西. 比如你在开发的过程中希望写几个简单的输入来测试你的程序, 或者验证你程序里的某处是否写对了, 于是你新建了个名字叫 <code>test.txt</code> 的文件, 里面写了一些测试的内容, 然后你在本地调试的时候会让你的程序读取这个文件.</p>
+<p><code>test.txt</code> 显然只是个用来存放写一些只对你自己有用的临时内容的文件, 你不希望让 Git 每次都记录这个文件的更改 (因为没意义), 所以你可以把它写进 <code>.gitignore</code> 中, 来让 Git 忽略它.</p>
+<p>其他类似的情况还包括, 你使用 VS Code 或 IDEA 开发你的编译器, 这些代码编辑器/IDE 可能会在项目中生成一些配置文件 (<code>.vscode</code> 或 <code>.idea</code>), 这些文件通常也是不需要被 Git 记录的, 因为其中包含了你的一些个人配置.</p>
+<p>...</p>
+</details>
+</div>
 <h2 id="_3">代码规范</h2>
 <div class="admonition info">
 <p class="admonition-title">具体的示例可以参考仓库中的各个视觉的代码仓库，各个仓库在编写代码时都已经将可读性考虑在内。</p>
@@ -1693,7 +1726,7 @@
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2025年4月3日 21:30:17"><span class="timeago" datetime="2025-04-03T21:30:17+08:00" locale="zh"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2025年4月3日 21:30:17">2025-04-03</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-timeago" title="2025年4月8日 19:04:33"><span class="timeago" datetime="2025-04-08T19:04:33+08:00" locale="zh"></span></span><span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_date" title="2025年4月8日 19:04:33">2025-04-08</span>
   </span>
 
     
